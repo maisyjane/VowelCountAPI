@@ -28,7 +28,7 @@ def vowelcount():
             num_of_vowels = str(count_vowels(string))
             r = {
                 "String" : string,
-                "Answer" : num_of_vowels,
+                "answer" : num_of_vowels,
                 "Status Code" : "200",
                 "Errors" : "false"
             }
@@ -50,7 +50,7 @@ def route_error_handling(error):
         error_text = "No Text Entered"
     r = {
                 "String" : error_text,
-                "Answer" : 0,
+                "answer" : 0,
                 "Status Code" : "404",
                 "Errors" : "true"
         }
@@ -62,8 +62,7 @@ def route_error_handling(error):
     return response
 
 #500 error?
-def getErrorText(error):
-    return error
+
 
 
 
