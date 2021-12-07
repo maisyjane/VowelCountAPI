@@ -8,4 +8,5 @@ test:
     - apt-get update -qy
     - apt-get install -y python3
     - cd src
+    - pip install flask
     - python3 -m unittest test
