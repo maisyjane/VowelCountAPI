@@ -22,7 +22,7 @@ def vowelcount():
         if string.isdigit():
             r = {
                 "String" : "Please enter character strings, not numbers",
-                "Vowels" : "N/A",
+                "Answer" : "N/A",
                 "Status Code" : "400",
                 "Errors" : "false"
             }
@@ -31,7 +31,7 @@ def vowelcount():
             num_of_vowels = str(count_vowels(string))
             r = {
                 "String" : string,
-                "Vowels" : num_of_vowels,
+                "Answer" : num_of_vowels,
                 "Status Code" : "200",
                 "Errors" : "false"
             }
@@ -49,7 +49,7 @@ def vowelcount():
 def route_error_handling(error):
     r = {
                 "String" : "No Text Entered",
-                "Vowels" : 0,
+                "Answer" : 0,
                 "Status Code" : "404",
                 "Errors" : "true"
         }
