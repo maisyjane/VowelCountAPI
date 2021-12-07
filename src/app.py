@@ -12,8 +12,8 @@ app = Flask(__name__)
 
 @app.route('/')
 def vowelcount(): 
-    # if not request.args.get('x'):
-    #         abort(404)
+    if not request.args.get('x'):
+        abort(404)
 
     if request.args.get('x'):
         string = str(request.args.get('x'))
@@ -36,8 +36,9 @@ def vowelcount():
                 "Errors" : "false"
             }
             status = 200
-        reply = json.dumps(r)
-        response = Response(response = reply, status = status, mimetype="application/json")
+            
+    reply = json.dumps(r)
+    response = Response(response = reply, status = status, mimetype="application/json")
 
     response.headers['Content-Type']='application/json'
     response.headers['Access-Control-Allow-Origin'] = '*'
