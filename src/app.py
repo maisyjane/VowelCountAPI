@@ -9,24 +9,21 @@ from vowel_counter import count_vowels
 
 app = Flask(__name__)
 
+isDigit = False
 
 @app.route('/')
 def vowelcount(): 
     if not request.args.get('x'):
+        global isDigit
+        isDigit = False
         abort(404)
 
     if request.args.get('x'):
         string = str(request.args.get('x'))
         
-        
         if string.isdigit():
-            r = {
-                "String" : "Please enter character strings, not numbers",
-                "Answer" : "N/A",
-                "Status Code" : "400",
-                "Errors" : "false"
-            }
-            status = 400
+            isDigit = True
+            abort(404)
         else:
             num_of_vowels = str(count_vowels(string))
             r = {
@@ -47,8 +44,12 @@ def vowelcount():
 
 @app.errorhandler(404)
 def route_error_handling(error):
+    if isDigit:
+        error_text = "Please enter character strings, not numbers"
+    else:
+        error_text = "No Text Entered"
     r = {
-                "String" : "No Text Entered",
+                "String" : error_text,
                 "Answer" : 0,
                 "Status Code" : "404",
                 "Errors" : "true"
@@ -59,6 +60,10 @@ def route_error_handling(error):
     response.headers['Content-Type']='application/json'
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response
+
+#500 error?
+def getErrorText(error):
+    return error
 
 
 

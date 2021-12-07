@@ -19,17 +19,22 @@ class TestVowelCount(unittest.TestCase):
     def test_request_with_valid_parameters(self):
         response = self.app.get('/?x=test')
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.data.decode("utf-8"), '{"String": "test", "Vowels": "1", "Status Code": "200", "Errors": "false"}')
+        self.assertEqual(response.data.decode("utf-8"), '{"String": "test", "Answer": "1", "Status Code": "200", "Errors": "false"}')
 
     def test_request_with_no_parameters(self):
         response = self.app.get('/')
-        self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.data.decode("utf-8"), '{"String": "No String entered", "Vowels": "N/A", "Status Code": "400", "Errors": "true"}')
+        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.data.decode("utf-8"), '{"String": "No Text Entered", "Answer": 0, "Status Code": "404", "Errors": "true"}')
+
+    def test_request_with_wrong_parameters_all_digits(self):
+        response = self.app.get('/?x=12345')
+        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.data.decode("utf-8"), '{"String": "Please enter character strings, not numbers", "Answer": 0, "Status Code": "404", "Errors": "true"}')
 
     def test_request_with_incorrect_route(self):
         response = self.app.get('/wrong')
-        self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.data.decode("utf-8"), '{"String": "Invalid String", "Vowels": "N/A", "Errors": "True", "Status Code": 400}')
+        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.data.decode("utf-8"), '{"String": "No Text Entered", "Answer": 0, "Status Code": "404", "Errors": "true"}')
 
    
 
