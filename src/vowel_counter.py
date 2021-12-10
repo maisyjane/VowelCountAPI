@@ -1,8 +1,8 @@
 def count_vowels(string):
     vowel_list = ['a', 'e', 'i', 'o', 'u']
-    string = string.lower()
     vowel_counter = 0
     if(string != ""):
+        string = string.lower()
         for s in string:
             for vowel in vowel_list:
                 if s == vowel:
