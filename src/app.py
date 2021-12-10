@@ -27,10 +27,10 @@ def vowelcount():
         else:
             num_of_vowels = str(count_vowels(string))
             r = {
-                "String" : string,
+                "text" : string,
                 "answer" : num_of_vowels,
                 "Status Code" : "200",
-                "Errors" : "false"
+                "error" : "false"
             }
             status = 200
             
@@ -49,10 +49,10 @@ def route_error_handling(error):
     else:
         error_text = "No Text Entered"
     r = {
-                "String" : error_text,
+                "text" : error_text,
                 "answer" : 0,
                 "Status Code" : "404",
-                "Errors" : "true"
+                "error" : "true"
         }
     status = 404
     reply = json.dumps(r)
