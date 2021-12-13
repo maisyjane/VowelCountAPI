@@ -16,10 +16,18 @@ class TestVowelCount(unittest.TestCase):
     def test_vowel_count(self):
         self.assertEqual(vowel_counter.count_vowels('maisy'),2)
 
+    def test_vowel_count2(self):
+        self.assertEqual(vowel_counter.count_vowels(''),0)
+
     def test_request_with_valid_parameters(self):
         response = self.app.get('/?x=test')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data.decode("utf-8"), '{"text": "test", "answer": "1", "Status Code": "200", "error": "false"}')
+        
+    def test_request_with_empty_parameters(self):
+        response = self.app.get('/?x=')
+        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.data.decode("utf-8"), '{"text": "No Text Entered", "answer": 0, "Status Code": "404", "error": "true"}')
 
     def test_request_with_no_parameters(self):
         response = self.app.get('/')
